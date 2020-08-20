@@ -1,7 +1,5 @@
 # FlashCards
 
-## What is This?
-
 ### This application is a tool to help study Array Prototypes. 
 
 * This application will present you with a multiple choice question consisting of 3 possible answers, using the arrow keys or typing in the corresponding number to the answer, you will enter your response. 
