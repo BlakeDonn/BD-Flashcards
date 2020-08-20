@@ -5,21 +5,33 @@ class Round {
     this.deck = deck.deck;
     this.turns = 0;
     this.incorrectGuesses = [];
-    this.returnCurrentCard = () => {
+    }
+    returnCurrentCard = (card) => {
       return this.deck[0];
     }
-    this.takeTurn = (guess) => {
-      this.turns++;
+    takeTurn = (guess) => {
+      let newTurn = new Turn();
       let currentCard = this.returnCurrentCard();
-      let newTurn = new Turn(guess, currentCard);
-      let result = newTurn.evaluateGuess();
-      !result ? this.incorrectGuesses.unshift(currentCard.id) : null;
-      this.deck.shift();
+      return this.getResult(guess, newTurn, currentCard);
+    }
+    getResult = (guess, newTurn, currentCard) =>{
+      return this.evaluateGuess(guess, newTurn, currentCard)
+    }
+    evaluateGuess = (guess, newTurn, currentCard) =>{
+      let result = newTurn.evaluateGuess(guess, currentCard);
+      this.handleResult(result, currentCard)
       return newTurn.giveFeedback(result);
     }
-    this.calculatePercentCorrect = () => {
+    handleResult = (result, currentCard) =>{
+      !result ? this.incorrectGuesses.unshift(currentCard.id) : null;
+      this.deck.shift();
+      this.turns++;
+    }
+    calculatePercentCorrect = () => {
       return  Math.round((this.incorrectGuesses.length / this.turns) * 100) ;
     }
+    endRound = () => {
+      console.log(`**Round over!** You answered ${this.calculatePercentCorrect()}% of the questions correctly!`)
+    }
   }
-}
 module.exports = Round;

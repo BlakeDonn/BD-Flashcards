@@ -4,17 +4,13 @@ const Card = require('../src/Card');
 const Turn = require('../src/Turn');
 const Deck = require('../src/Deck');
 const Round = require('../src/Round');
-let card;
-let turn;
-let deck;
-let round;
 
 describe('Round', function() {
   beforeEach((done) => {
     card1 = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
     card2 = new Card(2, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
     card3 = new Card(3, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
-    turn = new Turn('object', card);
+    turn = new Turn();
     deck = new Deck([card1, card2, card3]);
     round = new Round(deck);
     done();
@@ -45,9 +41,9 @@ describe('Round', function() {
   });  
 
   it('should increase turn counter', function() {
-    round.takeTurn();
+    round.takeTurn('object');
     expect(round.turns).to.eql(1);
-    round.takeTurn();
+    round.takeTurn('array');
     expect(round.turns).to.eql(2);
   });  
 
@@ -79,5 +75,5 @@ describe('Round', function() {
     round.takeTurn('object');
     expect(round.calculatePercentCorrect()).to.eql(33);
   });  
-
+  
 });
