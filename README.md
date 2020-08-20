@@ -16,7 +16,7 @@
 
 ## Setup
 
-1. Clone down this Repo (if using ssh run "git clone git@github.com:BlakeDonnBD-Flashcards.git")
+1. Clone down this Repo (if using ssh run `git clone git@github.com:BlakeDonnBD-Flashcards.git`
 
 2. run `npm install` in the root of the cloned directory
 
