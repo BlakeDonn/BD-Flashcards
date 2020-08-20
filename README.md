@@ -20,9 +20,9 @@
 
 2. run `npm install` in the root of the cloned directory
 
-3. type node index.js to run the application
+3. type `node index.js` to run the application
 
-4. Answer questions
+4. Answer questions as prompted
 
 5. Upon completion, a new iteration can be started by doing step 3 again
 
