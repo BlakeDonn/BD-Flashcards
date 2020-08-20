@@ -4,9 +4,10 @@ const Card = require('../src/Card');
 const Deck = require('../src/Deck');
 const Round = require('../src/Round');
 const data = require('../src/data');
+
 const prototypeQuestions = data.prototypeData;
 
-describe('Round', function() {
+describe('Round Architecture', function() {
   let card1;
   let card2;
   let card3;
@@ -45,41 +46,37 @@ describe('Round', function() {
     expect(round.incorrectGuesses).to.eql([]);
   });  
 
+  it('should evaluate guesses are correct', function() {
+    expect(round.takeTurn('object')).to.eql('correct!');
+  });  
+
+  it('should evaluate guesses are wrong', function() {
+    expect(round.takeTurn('array')).to.eql('incorrect!');
+  });  
+
+  it('should keep track of the turn', function() {
+    round.takeTurn();
+    round.takeTurn();
+    expect(round.turns).to.equal(2);
+  });  
+
+  it('should add incorrect ID to array', function() {
+    round.takeTurn('array')
+    expect(round.incorrectGuesses).to.eql([1]);
+  });  
+
+  it('should not add correct ID to array', function() {
+    round.takeTurn('object')
+    expect(round.incorrectGuesses).to.eql([]);
+  });  
+
   it('should return the card being played', function() {
     expect(round.returnCurrentCard()).to.equal(card1);
   });  
 
-  it('should increase turn counter after every turn', function() {
-    round.takeTurn('object');
-    expect(round.turns).to.eql(1);
-    round.takeTurn('array');
-    expect(round.turns).to.eql(2);
-  });  
-
   it('next card should become current card after every turn', function() {
-    expect(round.returnCurrentCard().id).to.eql(1);
-    round.takeTurn()
+    round.takeTurn();
     expect(round.returnCurrentCard().id).to.eql(2);
-    round.takeTurn()
-    expect(round.returnCurrentCard().id).to.eql(3);
-  });  
-
-  it('should evaluate guesses', function() {
-    let choice = round.takeTurn('object');
-    expect(choice).to.eql('correct!');
-    choice = round.takeTurn('array');
-    expect(choice).to.eql('correct!');
-    choice = round.takeTurn('array');
-    expect(choice).to.eql('incorrect!');
-  });  
-
-  it('should add incorrect ID to array', function() {
-    round.takeTurn('object');
-    expect(round.incorrectGuesses.length).to.eql(0);
-    round.takeTurn('test');
-    expect(round.incorrectGuesses.length).to.eql(1);
-    round.takeTurn('test');
-    expect(round.incorrectGuesses.length).to.eql(2);
   });  
 
   it('should calculate correct percent', function() {
@@ -87,15 +84,5 @@ describe('Round', function() {
     round.takeTurn('wrong');
     round.takeTurn('wrong');
     expect(round.calculatePercentCorrect()).to.eql(33);
-    round.takeTurn('wrong');
-    round.takeTurn('wrong');
-    expect(round.calculatePercentCorrect()).to.eql(20);
   });  
-
-  it('should have a bonus round', function() {
-    round.incorrectGuesses = [1, 2, 3, 4,5]
-    let yeet = round.bonusRound()
-    expect(yeet.length).to.eql(5);
-  });  
-
 });
