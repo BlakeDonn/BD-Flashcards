@@ -8,7 +8,7 @@
 
 * The dataset included in this package includes 30 flashcards, and will consider one round complete when the 30 flashcards have all been answered.
 
-* This particular application also contains a bonus round, when the 30 flashcards are finished, you will be presented with your success ratio, and be presented with the cards you got incorrect for another chance at greatness.
+* This particular application also contains a bonus round, when the 30 flashcards are finished, you will be presented with your success ratio, and be presented with the cards you answered incorrect for another chance at greatness.
 
 * This application will consider a game complete once all 30 questions have been answered correctly, and subsequently close.
 
